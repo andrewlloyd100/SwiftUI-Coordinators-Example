@@ -8,15 +8,30 @@
 import SwiftUI
 
 protocol ScreenBViewModelDelegate {
-    func goToC()
+    func navigateTo(destination: ScreenAViewModel.Destination)
 }
 
 class ScreenBViewModel: ObservableObject, Hashable {
  
-    var delegate: ScreenBViewModelDelegate?
+    var coordinatorDelegate: ScreenBViewModelDelegate?
     
-    func onTapC() {
-        delegate?.goToC()
+    enum Action {
+        case tapC
+    }
+    
+    enum Destination {
+        case c
+    }
+    
+    func handle(action: Action) {
+        switch action {
+        case .tapC:
+            onTapC()
+        }
+    }
+    
+    private func onTapC() {
+        coordinatorDelegate?.navigateTo(destination: .c)
     }
 }
 
@@ -30,7 +45,7 @@ struct ScreenB: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
     
                 Button("Go To C") {
-                    viewModel.onTapC()
+                    viewModel.handle(action: .tapC)
                 }
                 Spacer()
             }

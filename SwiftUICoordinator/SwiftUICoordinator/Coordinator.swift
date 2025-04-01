@@ -19,16 +19,32 @@ class CoordinatorModel: ObservableObject{
     
     init() {
         rootViewModel = ScreenAViewModel()
-        rootViewModel.delegate = self
+        rootViewModel.coordinatorDelegate = self
     }
     
-    func goToB() {
+    func navigateTo(destination: ScreenAViewModel.Destination) {
+        switch destination {
+        case .b:
+            goToB()
+        case .c:
+            goToC()
+        }
+    }
+    
+    func navigateTo(destination: ScreenBViewModel.Destination) {
+        switch destination {
+        case .c:
+            goToC()
+        }
+    }
+    
+    private func goToB() {
         let bViewModel = ScreenBViewModel()
-        bViewModel.delegate = self
+        bViewModel.coordinatorDelegate = self
         path.append(Destination.bScreen(bViewModel))
     }
     
-    func goToC() {
+    private func goToC() {
         path.append(Destination.cScreen)
     }
 }
