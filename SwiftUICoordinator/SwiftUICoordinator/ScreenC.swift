@@ -5,15 +5,21 @@ final class ScreenCViewModel {
     
     let goHome: () -> Void
     let goPicker: () -> Void
+    let goHelloWorld: () -> Void
+    
     init(goHome: @escaping () -> Void,
-         goPicker: @escaping () -> Void) {
+         goPicker: @escaping () -> Void,
+         goHelloWorld: @escaping () -> Void
+    ) {
         self.goHome = goHome
         self.goPicker = goPicker
+        self.goHelloWorld = goHelloWorld
     }
     
     enum Action {
         case goHomeTapped
         case goPickerTapped
+        case goHelloWorld
     }
     
     func handle(action: Action) {
@@ -22,6 +28,8 @@ final class ScreenCViewModel {
             goHome()
         case .goPickerTapped:
             goPicker()
+        case .goHelloWorld:
+            goHelloWorld()
         }
     }
 }
@@ -35,6 +43,9 @@ struct ScreenC: View {
             Text("We're Done")
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             
+            Button("Hello World") {
+                viewModel.handle(action: .goHelloWorld)
+            }
             Button("Go Home") {
                 viewModel.handle(action: .goHomeTapped)
             }

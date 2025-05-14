@@ -7,10 +7,19 @@ class CoordinatorModel {
     enum Destination: Hashable {
         case bScreen(ScreenBViewModel)
         case cScreen(ScreenCViewModel)
-        case pickerView
+    }
+    
+    enum SheetState: String, Identifiable {
+        case pickerModal
+        case helloWorld
+        
+        var id: String {
+            return self.rawValue
+        }
     }
     
     var rootViewModel: ScreenAViewModel?
+    var sheetState: SheetState?
     
     init(path: [Destination] = []) {
         self.path = path
@@ -33,7 +42,7 @@ class CoordinatorModel {
     }
     
     private func goToC() {
-        let cViewModel = ScreenCViewModel(goHome: popToRoot, goPicker: goToPicker)
+        let cViewModel = ScreenCViewModel(goHome: popToRoot, goPicker: goToPicker, goHelloWorld: goToHelloWorld)
         path.append(Destination.cScreen(cViewModel))
     }
     
@@ -42,7 +51,11 @@ class CoordinatorModel {
     }
     
     private func goToPicker() {
-        path.append(.pickerView)
+        sheetState = .pickerModal
+    }
+    
+    private func goToHelloWorld() {
+        sheetState = .helloWorld
     }
 }
 
@@ -59,11 +72,17 @@ struct Coordinator: View {
                     ScreenB(viewModel: model)
                   case let .cScreen(model):
                       ScreenC(viewModel: model)
-                  case .pickerView:
-                      PickerView()
                   }
                 }
                 .navigationTitle("SwiftUI Coordinators")
+        }
+        .sheet(item: $coordinatorModel.sheetState) { item in
+            switch item {
+            case .pickerModal:
+                PickerView()
+            case .helloWorld:
+                Text("Hello World")
+            }
         }
     }
 }
