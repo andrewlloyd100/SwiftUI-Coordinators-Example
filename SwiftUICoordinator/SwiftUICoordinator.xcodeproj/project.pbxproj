@@ -16,6 +16,7 @@
 		2361BB6B29795AA200168255 /* ScreenC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2361BB6A29795AA200168255 /* ScreenC.swift */; };
 		23DC5E7029EECF10003A9D7E /* SwiftUICoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC5E6F29EECF10003A9D7E /* SwiftUICoordinatorTests.swift */; };
 		23DC5E7729EEDC71003A9D7E /* Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC5E7629EEDC71003A9D7E /* Hashable.swift */; };
+		FDB696892DD3A5F20096BE5A /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB696882DD3A5F00096BE5A /* PickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		23DC5E6D29EECF10003A9D7E /* SwiftUICoordinatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftUICoordinatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		23DC5E6F29EECF10003A9D7E /* SwiftUICoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUICoordinatorTests.swift; sourceTree = "<group>"; };
 		23DC5E7629EEDC71003A9D7E /* Hashable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hashable.swift; sourceTree = "<group>"; };
+		FDB696882DD3A5F00096BE5A /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 				2361BB5329794ED300168255 /* SwiftUICoordinatorApp.swift */,
 				2361BB6529794F6C00168255 /* Coordinator.swift */,
 				2361BB6129794EE800168255 /* ScreenA.swift */,
+				FDB696882DD3A5F00096BE5A /* PickerView.swift */,
 				2361BB6329794EF100168255 /* ScreenB.swift */,
 				2361BB6A29795AA200168255 /* ScreenC.swift */,
 				2361BB5729794ED500168255 /* Assets.xcassets */,
@@ -215,6 +218,7 @@
 			files = (
 				2361BB6229794EE800168255 /* ScreenA.swift in Sources */,
 				23DC5E7729EEDC71003A9D7E /* Hashable.swift in Sources */,
+				FDB696892DD3A5F20096BE5A /* PickerView.swift in Sources */,
 				2361BB6B29795AA200168255 /* ScreenC.swift in Sources */,
 				2361BB6629794F6C00168255 /* Coordinator.swift in Sources */,
 				2361BB6429794EF100168255 /* ScreenB.swift in Sources */,
@@ -371,7 +375,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -401,7 +405,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

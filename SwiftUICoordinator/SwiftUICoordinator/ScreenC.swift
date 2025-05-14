@@ -1,22 +1,50 @@
-//
-//  ScreenB.swift
-//  SwiftUICoordinator
-//
-//  Created by Andrew Lloyd on 19/01/2023.
-//
-
 import SwiftUI
 
-struct ScreenC: View {
-    var body: some View {
-        Text("Hello C World!")
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(.yellow)
+@MainActor @Observable
+final class ScreenCViewModel {
+    
+    let goHome: () -> Void
+    let goPicker: () -> Void
+    init(goHome: @escaping () -> Void,
+         goPicker: @escaping () -> Void) {
+        self.goHome = goHome
+        self.goPicker = goPicker
+    }
+    
+    enum Action {
+        case goHomeTapped
+        case goPickerTapped
+    }
+    
+    func handle(action: Action) {
+        switch action {
+        case .goHomeTapped:
+            goHome()
+        case .goPickerTapped:
+            goPicker()
+        }
     }
 }
+extension ScreenCViewModel: Hashable {}
 
-struct ScreenC_Previews: PreviewProvider {
-    static var previews: some View {
-        ScreenC()
+struct ScreenC: View {
+    @Bindable var viewModel: ScreenCViewModel
+    
+    var body: some View {
+        VStack {
+            Text("We're Done")
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            
+            Button("Go Home") {
+                viewModel.handle(action: .goHomeTapped)
+            }
+            Button("Go Picker") {
+                viewModel.handle(action: .goPickerTapped)
+            }
+            Spacer()
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(.yellow)
+        .navigationTitle("Screen C")
     }
 }

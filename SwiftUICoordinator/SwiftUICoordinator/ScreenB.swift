@@ -1,62 +1,41 @@
-//
-//  ScreenB.swift
-//  SwiftUICoordinator
-//
-//  Created by Andrew Lloyd on 19/01/2023.
-//
-
 import SwiftUI
 
-protocol ScreenBViewModelDelegate {
-    func navigateTo(destination: ScreenAViewModel.Destination)
-}
-
-class ScreenBViewModel: ObservableObject, Hashable {
- 
-    var coordinatorDelegate: ScreenBViewModelDelegate?
+@MainActor @Observable
+final class ScreenBViewModel {
     
-    enum Action {
-        case tapC
+    let doneTapped: () -> Void
+    init(doneTapped: @escaping () -> Void) {
+        self.doneTapped = doneTapped
     }
     
-    enum Destination {
-        case c
+    enum Action {
+        case doneTapped
     }
     
     func handle(action: Action) {
         switch action {
-        case .tapC:
-            onTapC()
+        case .doneTapped:
+            doneTapped()
         }
     }
-    
-    private func onTapC() {
-        coordinatorDelegate?.navigateTo(destination: .c)
-    }
 }
+extension ScreenBViewModel: Hashable {}
 
 struct ScreenB: View {
-    @ObservedObject var viewModel: ScreenBViewModel
+    @Bindable var viewModel: ScreenBViewModel
     
     var body: some View {
-        ZStack {
-            VStack {
-                Text("Hello B World!")
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-    
-                Button("Go To C") {
-                    viewModel.handle(action: .tapC)
-                }
-                Spacer()
-            }
+        VStack {
+            Text("Hello B World!")
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             
+            Button("Done") {
+                viewModel.handle(action: .doneTapped)
+            }
+            Spacer()
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.green)
-    }
-}
-
-struct ScreenB_Previews: PreviewProvider {
-    static var previews: some View {
-        ScreenB(viewModel: ScreenBViewModel())
+        .navigationTitle("Screen B")
     }
 }

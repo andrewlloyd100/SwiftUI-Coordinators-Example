@@ -1,74 +1,53 @@
-//
-//  ScreenA.swift
-//  SwiftUICoordinator
-//
-//  Created by Andrew Lloyd on 19/01/2023.
-//
-
 import SwiftUI
 
-protocol ScreenAViewModelDelegate {
-    func navigateTo(destination: ScreenAViewModel.Destination)
-}
+@MainActor @Observable
+class ScreenAViewModel {
 
-class ScreenAViewModel: ObservableObject, Hashable {
-    var coordinatorDelegate: ScreenAViewModelDelegate?
+    let nextTapped: () -> Void
+    let doneTapped: () -> Void
     
     enum Action {
-        case tapB
-        case tapC
+        case nextTapped
+        case doneTapped
     }
     
-    enum Destination {
-        case b
-        case c
+    init(nextTapped: @escaping () -> Void,
+         doneTapped: @escaping () -> Void) {
+        self.nextTapped = nextTapped
+        self.doneTapped = doneTapped
     }
     
     func handle(action: Action) {
         switch action {
-        case .tapB:
-            tapB()
-        case .tapC:
-            tapC()
+        case .nextTapped:
+            nextTapped()
+        case .doneTapped:
+            doneTapped()
         }
     }
-    
-    private func tapB() {
-        coordinatorDelegate?.navigateTo(destination: .b)
-    }
-    
-    private func tapC() {
-        coordinatorDelegate?.navigateTo(destination: .c)
-    }
 }
+extension ScreenAViewModel: Hashable {}
 
 struct ScreenA: View {
-    @ObservedObject var viewModel: ScreenAViewModel
+    @Bindable var viewModel: ScreenAViewModel
     
     var body: some View {
-        ZStack {
-            VStack {
-                Text("Hello A World!")
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    
-                Button("Go To B") {
-                    viewModel.handle(action: .tapB)
-                }
-                
-                Button("Go To C") {
-                    viewModel.handle(action: .tapC)
-                }
-                Spacer()
+        VStack {
+            Text("Hello A World!")
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            
+            Button("Next") {
+                viewModel.handle(action: .nextTapped)
             }
             
+            Button("Done") {
+                viewModel.handle(action: .doneTapped)
+            }
+            Spacer()
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.red)
-        
+        .navigationTitle("Screen A")
     }
 }
 
-struct ScreenA_Previews: PreviewProvider {
-    static var previews: some View {
-        ScreenA(viewModel: ScreenAViewModel())
-    }
-}

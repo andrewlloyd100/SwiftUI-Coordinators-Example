@@ -1,17 +1,15 @@
-//
-//  SwiftUICoordinatorApp.swift
-//  SwiftUICoordinator
-//
-//  Created by Andrew Lloyd on 19/01/2023.
-//
-
 import SwiftUI
 
 @main
 struct SwiftUICoordinatorApp: App {
+    @State var coordinatorModel: CoordinatorModel = .init()
+    
     var body: some Scene {
         WindowGroup {
-            Coordinator(coordinatorModel: CoordinatorModel())
+            Coordinator(coordinatorModel: coordinatorModel)
+                .onAppear() {
+                    coordinatorModel.goToEnd()
+                }
         }
     }
 }
